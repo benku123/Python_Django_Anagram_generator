@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+<h1>Anagram</h1>
+<form action="{% url 'anagram_form' %}">
+    <div class="container">
+        <input class="form-control mr-sm-2 mt-5 b" type="search" placeholder="Search" aria-label="Search" name="search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <br>
+    </div>
+</form>
+{% for i in anagram_text %}
+
+    <div class="text-center lol"> <br>
+        {{ i }}
+    </div>
+{% endfor %}
+
+{% endblock %}
