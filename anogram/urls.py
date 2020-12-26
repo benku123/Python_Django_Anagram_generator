@@ -19,7 +19,6 @@ from anagramapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.anagram_form),
     path('anagram/', views.anagram_form, name='anagram_form'),
-    path('palindrome/', views.palindrome, name='palindrome_form')
-
 ]

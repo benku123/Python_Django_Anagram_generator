@@ -3,23 +3,25 @@ from django.shortcuts import render
 from itertools import permutations
 
 
-# Create your views here.
+def generator_anagram(word):
+    '''stands for yielding 1 words at a time'''
+    for i in permutations(word, len(word)):
+        yield ''.join(i)
+
+
 def anagram_form(request):
     search_query = request.GET.get('search')
-    anagram_text = ['Here you will see your anagram']
+    anagram_text = 'Here you will see your anagram'
+    list_of_words = []
+
     if search_query:
-        anagram_text = sorted(set(''.join(i) for i in permutations(list(search_query))))
-    return render(request, 'word_solver/anagram.html', context={'anagram_text': anagram_text, 'title': 'Anagram'})
+        words = generator_anagram(search_query)
+        for i in range(10):
+            try:
+                list_of_words.append(''.join(next(words)))
+            except StopIteration:
+                break
 
-
-def palindrome(request):
-
-    palindrome_text = request.GET.get('palindrome')
-    if palindrome_text:
-        palindrome_converted = ' '.join(i[::-1] for i in palindrome_text.split())
-    context = {
-        'title': 'Palindrome',
-        'palindrome_text': palindrome_text,
-        'palindrome_converted': palindrome_converted,
-    }
-    return render(request, 'word_solver/palindrome.html', context)
+    return render(request, 'word_solver/anagram.html', context={'list_of_words': list_of_words,
+                                                                'anagram_text': anagram_text,
+                                                                'title': 'Anagram'})
