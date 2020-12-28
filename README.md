@@ -4,8 +4,9 @@ i created the anagram generator that takes
 
 as an input a word and produce list of possible anagrams 
 
-## First of all we need to activate virtual environment
-> .\env\Scripts\activate 
+## First of all, we need to install dependencies
+>  pip3 install -r requirements.txt 
+
 
 If you are on Windows OS
 
